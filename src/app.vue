@@ -1,0 +1,3 @@
+<template>
+  <LayoutHeader></LayoutHeader>
+</template>
