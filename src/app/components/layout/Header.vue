@@ -1,5 +1,7 @@
 <template>
-  <header class="flex items-center justify-between px-4 py-2 shadow-md w-full">
+  <header
+    class="fixed top-0 left-0 z-50 flex items-center justify-between px-4 py-2 shadow-md w-full bg-surface-950"
+  >
     <!-- Sección izquierda -->
     <div class="flex items-center gap-3">
       <!-- Botón hamburguesa en móvil -->
@@ -24,17 +26,21 @@
 
     <!-- Sección derecha -->
     <div class="flex items-center gap-3">
-      <img src="/assets/imgs/logo_github.png" class="w-12 h-12" />
-      <img src="/assets/imgs/logo_marcsoft.png" class="w-12 h-12" />
+      <a href="https://github.com/Miguel199627" target="_blank"
+        ><img src="/assets/imgs/logo_github.png" class="w-12 h-12"
+      /></a>
+      <a href="https://www.marcsoft.com.co/" target="_blank"
+        ><img src="/assets/imgs/logo_marcsoft.png" class="w-12 h-12"
+      /></a>
 
       <!-- Avatar -->
-      <Avatar
+      <!-- <Avatar
         icon="pi pi-user"
         shape="circle"
         class="cursor-pointer"
         @click="toggleAvatarMenu"
       />
-      <Menu ref="avatarMenu" :model="avatarItems" :popup="true" />
+      <Menu ref="avatarMenu" :model="avatarItems" :popup="true" /> -->
     </div>
 
     <!-- Sidebar en móvil -->
@@ -68,10 +74,25 @@
 }
 </style>
 
-<script setup lang="ts">
+<script setup>
 const sidebarVisible = ref(false);
-const avatarMenu = ref();
+// const avatarMenu = ref();
 const isMobile = ref(false);
+const router = useRouter();
+
+const menuItems = [
+  // { label: "Inicio", icon: "pi pi-home", command: () => router.push("/") },
+  {
+    label: "Calculadora de Calorias",
+    icon: "pi pi-calculator",
+    command: () => router.push("/calculadora-calorias"),
+  },
+];
+
+// const avatarItems = [
+//   { label: "Perfil", icon: "pi pi-user", command: () => navigate("perfil") },
+//   { label: "Salir", icon: "pi pi-sign-out", command: () => logout() },
+// ];
 
 const updateScreenSize = () => {
   isMobile.value = window.innerWidth <= 960;
@@ -82,29 +103,15 @@ onMounted(() => {
   window.addEventListener("resize", updateScreenSize);
 });
 
-const menuItems = [
-  { label: "Inicio", icon: "pi pi-home", command: () => navigate("/") },
-  {
-    label: "Calculadora Calorias",
-    icon: "pi pi-calculator",
-    command: () => navigate("dashboard"),
-  },
-];
+// function toggleAvatarMenu(event) {
+//   avatarMenu.value.toggle(event);
+// }
 
-const avatarItems = [
-  { label: "Perfil", icon: "pi pi-user", command: () => navigate("perfil") },
-  { label: "Salir", icon: "pi pi-sign-out", command: () => logout() },
-];
+// function navigate(ruta) {
+//   alert(`Navegar a: ${ruta}`);
+// }
 
-function toggleAvatarMenu(event: Event) {
-  avatarMenu.value.toggle(event);
-}
-
-function navigate(ruta: string) {
-  alert(`Navegar a: ${ruta}`);
-}
-
-function logout() {
-  alert("Cerrar sesión");
-}
+// function logout() {
+//   alert("Cerrar sesión");
+// }
 </script>

@@ -11,6 +11,15 @@ export default defineNuxtConfig({
     pages: "app/pages",
   },
   components: [{ path: "~/app/components", pathPrefix: true }],
+  imports: {
+    dirs: ["app/composables"],
+  },
+  runtimeConfig: {
+    public: {
+      apiBase: "http://localhost:8080/playground-calculadora_calorias_api/api/",
+    },
+  },
+  plugins: ["~/plugins/yup-locales.ts"],
   primevue: {
     options: {
       theme: {
